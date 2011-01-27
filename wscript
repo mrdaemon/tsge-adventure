@@ -30,7 +30,7 @@ def configure(conf):
     conf.check_cfg(package='gobject-2.0', uselib_store='GOBJECT',
             atleast_version='2.14.0', mandatory=True, args='--cflags --libs')
 
-    conf.check_vala_deps()
+    #conf.check_vala_deps()
 
     # Check for curses/ncurses library
     #CURSES_LIB = "ncurses" if Options.options.with_ncurses else "curses"
