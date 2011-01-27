@@ -14,15 +14,19 @@ Status
 The game will not be of much interest to anyone until it nears version 1.0.
 Keep watching this space.
 
-Hacking
---------
+Very Hastily Written™ Hacker's Guide to Poking at the Source
+-------------------------------------------------------------
 
 The program is written in the Vala programming Language.
 To build, you need the full valac toolchain, the curses VAPI, and Python.
 
 To build:
 
-./waf configure
-./waf
+1. ``./waf configure``
+2. ``./waf build``
+
+Special instructions should eventually be available for OS X, which often
+depends on MacPorts.
+
 
 
