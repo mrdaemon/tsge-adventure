@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Simple ./configure flypaper to help first time users who 
+# Simple dummy ./configure script to help overeager first-time users and devs
+# who are way too used to GNU Autotools and the canonical "./configure ; make"
+# recipe.
 
 echo "This project uses the Waf build system."
 echo "http://code.google.com/p/waf/"
