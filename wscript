@@ -5,7 +5,7 @@ VERSION_MAJOR_MINOR =  ".".join(VERSION.split(".")[0:2])
 APPNAME = "tsge"
 
 srcdir = '.'
-blddir = '_build_'
+blddir = 'build'
 
 def set_options(opt):
     opt.tool_options('compiler_cc')

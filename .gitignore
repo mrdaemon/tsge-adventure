@@ -1,3 +1,3 @@
 .lock-wscript
 .waf-*
-_build_/
+/build/
