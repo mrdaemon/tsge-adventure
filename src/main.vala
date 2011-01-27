@@ -20,23 +20,59 @@
 
 using Curses;
 
-int main(string[] args) {
-	initscr();
 
-	start_color();
-	init_pair(1, Color.YELLOW, Color.BLUE);
+class TsgeMain : Object {
 
-	/* Create a window
-	 * height/lines, width/columns, y, x) */
-	var win = new Window(LINES - 4, COLS - 8, 2, 4);
+	/**
+	 * Program entry point
+	 */
+	public static int main(string[] args) {
 
-	win.bkgdset (COLOR_PAIR(1) | Attribute.BOLD);
-	win.addstr("Sup, fuckers");
-	win.clrtobot(); // clear to bottom, doesn't move cursor
-	win.getch(); // Read char
+		init_display();
 
-	endwin(); // Reset terminal mode
+		/* Create a window
+		 * height/lines, width/columns, y, x) */
+		var console = new Window(LINES - 4, COLS - 8, 2, 4);
 
-	return 0;
+		console.bkgdset (COLOR_PAIR(1) | Attribute.BOLD);
+		console.addstr("Loading...");
+		console.clrtobot(); // clear to bottom, doesn't move cursor
+		console.getch(); // Read char
+
+		cleanup();
+
+		return 0;
+	}
+
+	/**
+	 * Initalize curses display
+	 */
+	private static void init_display(){
+		// Init curses screen
+		initscr();
+
+		// Color Support Check
+		if(has_colors()) {
+			start_color();
+			init_pair(1, Color.YELLOW, Color.BLUE); // Default shell color
+		} else {
+			stderr.printf("ERROR: Your terminal does not support " +
+				"color mode. Aborting...\n");
+			Process.exit(1);
+		}
+
+		raw();
+		noecho();
+		stdscr.keypad(true);
+
+	}
+
+	/**
+	 * Cleanup and reset terminal
+	 */
+	private static void cleanup(){
+		// Reset terminal mode
+		endwin();
+		stdout.printf("So long and thanks for all the shoes.\n");
+	}
 }
-
