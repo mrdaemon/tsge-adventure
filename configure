@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Simple ./configure flypaper to help first time users who 
+
+echo "This project uses the Waf build system."
+echo "http://code.google.com/p/waf/"
+echo
+
+[[ -z `which python` ]] && echo "You will need Python 2.5+ to build this tsge." \
+	&& exit 1
+
+echo "To configure the project, please run:"
+echo
+echo "   ./waf configure"
+echo
+echo "To build the project, please run:"
+echo
+echo "   ./waf"
+echo
+echo "Default targets are very similar to standard automake ones."
+echo "For more information, see the documentation."
+
