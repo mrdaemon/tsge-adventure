@@ -7,7 +7,7 @@ echo "This project uses the Waf build system."
 echo "http://code.google.com/p/waf/"
 echo
 
-[[ -z `which python` ]] && echo "You will need Python 2.5+ to build this tsge." \
+[[ -z `which python` ]] && echo "You will need Python 2.3+ to build this tsge." \
 	&& exit 1
 
 echo "To configure the project, please run:"
