@@ -1,17 +1,10 @@
 #!/usr/bin/env python
 
 def build(bld):
-    prog = bld(features='cc cprogram')
-    # symbolic name used to reference this object
-    prog.name = 'tsge.program'
-    # name of the resulting program
-    prog.target = 'tsge'
-    prog.source = 'main.vala'
-    # libraries to link against
-    prog.uselib = 'ncurses'
-    # Vala packages to use
-    prog.packages = 'curses'
-    # Extra vapi dirs
-    #prog.vapi_dirs = '../my_lib'
-    # Enable threading
-    #prog.threading = True
+    bld.program(
+        packages = 'curses',
+        target = 'tsge',
+        uselib = 'GLIB GOBJECT CURSES',
+        source = 'main.vala',
+        )
+
