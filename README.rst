@@ -22,8 +22,11 @@ To build, you need the full valac toolchain, the curses VAPI, and Python.
 
 To build:
 
-1. ``./waf configure``
-2. ``./waf build``
+ 1. ``./configure``
+ 2. ``make``
+
+These are of course wrappers, the build system used is ``waf``. 
+Try ``./waf`` in the root directory.
 
 Special instructions should eventually be available for OS X, which often
 depends on MacPorts.
