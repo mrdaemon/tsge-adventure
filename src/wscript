@@ -3,8 +3,8 @@
 def build(bld):
     bld.program(
         packages = 'curses',
-        target = 'tsge',
-        uselib = 'GLIB GOBJECT CURSES',
+        target = 'tsge-adventure',
+        use = 'GLIB GOBJECT NCURSES',
         source = 'main.vala',
         )
 
