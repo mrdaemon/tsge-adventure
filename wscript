@@ -13,17 +13,13 @@ out = 'build'
 def options(opt):
     opt.load('compiler_c')
     opt.load('vala')
+    opt.add_option('--with-pdcurses-dir', action="store", default=False,
+        help="Use pdcurses and specify where it is unpacked." \
+        "(Mostly useful for Win32 and cross-compilation)")
 
 def configure(conf):
     conf.load('compiler_c')
     conf.load('vala')
-
-    # Let's spare our windows friends some pain by setting
-    # then straight right away.
-    if sys.platform == 'win32':
-        print("Windows does not have (n)curses. Sorry.")
-        print("If you really want to, cygwin's your best bet.")
-        conf.fatal("Platform unsupported.")
 
     if sys.platform == 'darwin':
         print("Configuring for Mac OS X")
@@ -36,14 +32,21 @@ def configure(conf):
     else:
         conf.load('c_config')
 
-    try:
-        conf.check_cc(header_name='ncurses.h', lib=['ncurses'],
-            uselib_store='NCURSES')
-    except conf.errors.ConfigurationError:
-        print("OH GOD WHERE IS NCURSES")
-        print("Hold on, hold on, let's try grandpa curses.")
-        conf.check_cc(header_name='curses.h', lib=['curses'],
-            uselib_store='NCURSES', mandatory=True)
+    # Use extra pdcurses directory? (mostly useful on windows
+    # and for cross compiling.
+    if conf.options.with_pdcurses_dir:
+        conf.env.append_unique('INCLUDES', conf.options.with_pdcurses_dir)
+        conf.env.append_unique('LIBPATH', conf.options.with_pdcurses_dir)
+
+    conf.check(features="c", header_name='curses.h', mandatory=True)
+
+    if conf.options.with_pdcurses_dir:
+        conf.check_cc(lib='pdcurses', uselib_store="CURSES")
+    else:
+        try:
+            conf.check_cc(lib='ncurses', uselib_store="CURSES")
+        except conf.errors.ConfigurationError:
+            conf.check_cc(lib='curses', uselib_store="CURSES")
 
     conf.check_cfg(package='glib-2.0', uselib_store='GLIB',
         atleast_version='2.10.0', args='--cflags --libs')
