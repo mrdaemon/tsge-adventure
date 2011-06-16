@@ -2,9 +2,9 @@
 
 def build(bld):
     bld.program(
-        packages = 'curses',
-        target = 'tsge-adventure',
-        use = 'GLIB GOBJECT CURSES',
-        source = 'main.vala',
+            packages = 'curses',
+            target = 'tsge-adventure',
+            use = 'GLIB GOBJECT CURSES',
+            source = 'main.vala',
         )
 

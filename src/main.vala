@@ -20,59 +20,58 @@
 
 using Curses;
 
-
 class TsgeMain : Object {
 
-	/**
-	 * Program entry point
-	 */
-	public static int main(string[] args) {
+    /**
+     * Program entry point
+     */
+    public static int main(string[] args) {
 
-		init_display();
+        init_display();
 
-		/* Create a window
-		 * height/lines, width/columns, y, x) */
-		var console = new Window(LINES - 4, COLS - 8, 2, 4);
+        /* Create a window
+         * height/lines, width/columns, y, x) */
+        var console = new Window(LINES - 4, COLS - 8, 2, 4);
 
-		console.bkgdset (COLOR_PAIR(1) | Attribute.BOLD);
-		console.addstr("Loading...");
-		console.clrtobot(); // clear to bottom, doesn't move cursor
-		console.getch(); // Read char
+        console.bkgdset (COLOR_PAIR(1) | Attribute.BOLD);
+        console.addstr("Loading...");
+        console.clrtobot(); // clear to bottom, doesn't move cursor
+        console.getch(); // Read char
 
-		cleanup();
+        cleanup();
 
-		return 0;
-	}
+        return 0;
+    }
 
-	/**
-	 * Initalize curses display
-	 */
-	private static void init_display(){
-		// Init curses screen
-		initscr();
+    /**
+     * Initalize curses display
+     */
+    private static void init_display(){
+        // Init curses screen
+        initscr();
 
-		// Color Support Check
-		if(has_colors()) {
-			start_color();
-			init_pair(1, Color.YELLOW, Color.BLUE); // Default shell color
-		} else {
-			stderr.printf("ERROR: Your terminal does not support " +
-				"color mode. Aborting...\n");
-			Process.exit(1);
-		}
+        // Color Support Check
+        if(has_colors()) {
+            start_color();
+            init_pair(1, Color.YELLOW, Color.BLUE); // Default shell color
+        } else {
+            stderr.printf("ERROR: Your terminal does not support " +
+                "color mode. Aborting...\n");
+            Process.exit(1);
+        }
 
-		raw();
-		noecho();
-		stdscr.keypad(true);
+        raw();
+        noecho();
+        stdscr.keypad(true);
 
-	}
+    }
 
-	/**
-	 * Cleanup and reset terminal
-	 */
-	private static void cleanup(){
-		// Reset terminal mode
-		endwin();
-		stdout.printf("So long and thanks for all the shoes.\n");
-	}
+    /**
+     * Cleanup and reset terminal
+     */
+    private static void cleanup(){
+        // Reset terminal mode
+        endwin();
+        stdout.printf("So long and thanks for all the shoes.\n");
+    }
 }
